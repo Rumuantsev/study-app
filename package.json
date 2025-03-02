@@ -1,0 +1,26 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^22.13.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
