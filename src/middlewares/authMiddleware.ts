@@ -18,10 +18,12 @@ export const authenticateJWT = async (
     res.status(401).json({ message: "Access denied. No token provided." });
   }
 
+  interface JwtPayload {
+    userId: string;
+  }
+
   try {
-    const decoded = jwt.verify(token!, process.env.JWT_SECRET!) as {
-      userId: string;
-    };
+    const decoded = jwt.verify(token!, process.env.JWT_SECRET!) as JwtPayload;
     req.userId = decoded.userId;
     next();
   } catch {

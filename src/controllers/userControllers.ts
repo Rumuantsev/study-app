@@ -14,8 +14,7 @@ const signup = async (req: Request, res: Response) => {
     await user.save();
     const token = generateToken(user._id.toString());
     res.status(201).json({ token });
-  } catch (err) {
-    const error = err as Error;
+  } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
 };
@@ -39,9 +38,8 @@ const signin = async (req: Request, res: Response) => {
 
     const token = generateToken(user!._id.toString());
     res.status(200).json({ token });
-  } catch (error) {
-    const err = error as Error;
-    res.status(500).json({ message: err.message });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -53,9 +51,8 @@ const getUserById = async (req: Request, res: Response) => {
   try {
     const user = await UserModel.findById(req.params.id, "-password");
     res.json(user).status(200);
-  } catch (error) {
-    const err = error as Error;
-    res.status(500).json({ message: err.message });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -63,9 +60,8 @@ const deleteUser = async (req: Request, res: Response) => {
   try {
     await UserModel.findByIdAndDelete(req.params.id);
     res.json({ message: "User deleted" }).status(200);
-  } catch (error) {
-    const err = error as Error;
-    res.status(500).json({ message: err.message });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };
 
