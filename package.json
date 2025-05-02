@@ -1,34 +1,31 @@
 {
   "name": "lab1",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "services/*"
+  ],
   "scripts": {
-    "dev": "nodemon src/app.ts"
+    "dev:auth": "yarn workspace auth-service run dev",
+    "dev:user": "yarn workspace user-service run dev",
+    "dev:gateway": "yarn workspace api-gateway run dev",
+    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:user\" \"yarn dev:gateway\"",
+    "build": "yarn workspaces run build",
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspaces run test"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@types/express": "^5.0.0",
-    "@types/mongoose": "^5.11.97",
-    "@types/node": "^22.13.0",
-    "bcrypt": "^5.1.1",
-    "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.6",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "dotenv": "^16.4.7",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/express": "^5.0.0",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/mongoose": "^5.11.97",
-    "@types/node": "^22.13.0",
-    "eslint": "^9.25.0",
+    "typescript": "^5.7.3",
+    "ts-node-dev": "^2.0.0",
     "nodemon": "^3.1.9",
-    "prettier": "^3.5.3"
+    "eslint": "^9.25.0",
+    "prettier": "^3.5.3",
+    "concurrently": "^8.0.1",
+    "@types/node": "^22.13.0"
   }
 }
