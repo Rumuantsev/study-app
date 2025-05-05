@@ -9,23 +9,29 @@
     "dev:auth": "yarn workspace auth-service run dev",
     "dev:user": "yarn workspace user-service run dev",
     "dev:gateway": "yarn workspace api-gateway run dev",
-    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:user\" \"yarn dev:gateway\"",
+    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:gateway\"",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test"
   },
   "dependencies": {
-    "express": "^4.21.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "cors": "^2.8.5"
+    "express": "^4.21.2"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
-    "ts-node-dev": "^2.0.0",
-    "nodemon": "^3.1.9",
-    "eslint": "^9.25.0",
-    "prettier": "^3.5.3",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
     "concurrently": "^8.0.1",
-    "@types/node": "^22.13.0"
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3"
   }
 }

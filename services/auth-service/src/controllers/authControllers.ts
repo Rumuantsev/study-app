@@ -47,27 +47,7 @@ const generateToken = (userId: string) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET!, { expiresIn: "1h" });
 };
 
-const getUserById = async (req: Request, res: Response) => {
-  try {
-    const user = await UserModel.findById(req.params.id, "-password");
-    res.json(user).status(200);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-const deleteUser = async (req: Request, res: Response) => {
-  try {
-    await UserModel.findByIdAndDelete(req.params.id);
-    res.json({ message: "User deleted" }).status(200);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-export const userController = {
+export const authController = {
   signup,
   signin,
-  getUserById,
-  deleteUser,
 };
