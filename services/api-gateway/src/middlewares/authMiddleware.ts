@@ -7,7 +7,7 @@ declare module "express" {
   }
 }
 
-export const authenticateJWT = async (
+export const authenticateJWT = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -16,6 +16,7 @@ export const authenticateJWT = async (
 
   if (!token) {
     res.status(401).json({ message: "Access denied. No token provided." });
+    return;
   }
 
   interface JwtPayload {
@@ -28,5 +29,6 @@ export const authenticateJWT = async (
     next();
   } catch {
     res.status(400).json({ message: "Invalid token." });
+    return;
   }
 };

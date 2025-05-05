@@ -1,8 +1,6 @@
 import express from "express";
-// import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import { connectDB } from "./config/dataBase";
-import User from "../src/models/userModel";
 import { userRoutes } from "./routes/userRoutes";
 dotenv.config();
 
@@ -11,6 +9,7 @@ app.use(express.json());
 
 connectDB();
 
-app.use("/api/user", userRoutes);
+app.use(userRoutes);
 
-app.listen(process.env.PORT, () => console.log("Server running on port 3000"));
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log(`User service running on port ${PORT}`));
