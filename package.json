@@ -6,10 +6,11 @@
     "services/*"
   ],
   "scripts": {
+    "dev:gateway": "yarn workspace api-gateway run dev",
     "dev:auth": "yarn workspace auth-service run dev",
     "dev:user": "yarn workspace user-service run dev",
-    "dev:gateway": "yarn workspace api-gateway run dev",
-    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:gateway\" \"yarn dev:user\"",
+    "dev:course": "yarn workspace course-service run dev",
+    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:gateway\" \"yarn dev:user\" \"yarn dev:course\"",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test"
