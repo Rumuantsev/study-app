@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import UserModel from "../models/userModel";
+import { User } from "../models/userModel";
 import bcrypt from "bcrypt";
 
 const signup = async (req: Request, res: Response) => {
   try {
     const { login } = req.body;
-    const existingUser = await UserModel.findOne({ login });
+    const existingUser = await User.findOne({ login });
     if (existingUser) {
       throw new Error("User with this login already exists!");
     }
-    const user = new UserModel(req.body);
+    const user = new User(req.body);
     await user.save();
     const token = generateToken(user._id.toString());
     res.status(201).json({ token });
@@ -23,9 +23,10 @@ const signin = async (req: Request, res: Response) => {
   try {
     const { login, password } = req.body;
 
-    const user = await UserModel.findOne({ login });
+    const user = await User.findOne({ login });
     if (!user) {
       res.status(401).json({ message: "Invalid credentials" });
+      return;
     }
 
     const isPasswordValid: boolean = await bcrypt.compare(
@@ -34,12 +35,14 @@ const signin = async (req: Request, res: Response) => {
     );
     if (!isPasswordValid) {
       res.status(401).json({ message: "Invalid credentials" });
+      return;
     }
 
     const token = generateToken(user!._id.toString());
     res.status(200).json({ token });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
+    return;
   }
 };
 

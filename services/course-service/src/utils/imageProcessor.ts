@@ -8,8 +8,8 @@ export const processImage = async (filePath: string) => {
   const ext = path.extname(filePath);
   const processedPath = filePath.replace(ext, `_processed${ext}`);
   const watermarkSize = {
-    width: 40,
-    height: 20,
+    width: 100,
+    height: 50,
   };
   const watermarkBuffer = await sharp(watermarkPath)
     .resize(watermarkSize.width, watermarkSize.height, {

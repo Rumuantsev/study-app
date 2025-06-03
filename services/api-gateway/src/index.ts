@@ -26,6 +26,26 @@ app.use(
   })
 );
 
+app.use(
+  "/api/course",
+  authenticateJWT,
+  createProxyMiddleware({
+    target: `http://localhost:3003`,
+    changeOrigin: true,
+    logger: console,
+  })
+);
+
+app.use(
+  "/api/tag",
+  authenticateJWT,
+  createProxyMiddleware({
+    target: `http://localhost:3004`,
+    changeOrigin: true,
+    logger: console,
+  })
+);
+
 app.use(express.json());
 
 const PORT = process.env.PORT;

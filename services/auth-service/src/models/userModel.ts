@@ -2,12 +2,15 @@ import mongoose from "mongoose";
 import { CallbackError } from "mongoose";
 import bcrypt from "bcrypt";
 
-const UserSchema = new mongoose.Schema({
+const { Schema, model } = mongoose;
+
+const UserSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   login: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
+  favoritesCourses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
 });
 
 UserSchema.pre("save", async function (next) {
@@ -21,5 +24,4 @@ UserSchema.pre("save", async function (next) {
   }
 });
 
-const User = mongoose.model("User", UserSchema);
-export default User;
+export const User = model("User", UserSchema);

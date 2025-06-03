@@ -19,6 +19,7 @@ const CourseSchema = new Schema({
   published: { type: Boolean, default: false },
   author: { type: Schema.Types.ObjectId, ref: "User", required: true },
   createdAt: { type: Date, default: Date.now, required: true },
+  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
 });
 
 CourseSchema.pre("validate", function (next) {
