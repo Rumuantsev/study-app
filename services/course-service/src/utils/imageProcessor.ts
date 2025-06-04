@@ -3,7 +3,6 @@ import path from "path";
 import fs from "fs";
 
 const watermarkPath = path.join(__dirname, "..", "assets", "watermark.png");
-console.log("Watermark path:", watermarkPath);
 export const processImage = async (filePath: string) => {
   const ext = path.extname(filePath);
   const processedPath = filePath.replace(ext, `_processed${ext}`);

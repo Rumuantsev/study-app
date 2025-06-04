@@ -11,7 +11,8 @@
     "dev:user": "yarn workspace user-service run dev",
     "dev:course": "yarn workspace course-service run dev",
     "dev:tag": "yarn workspace tag-service run dev",
-    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:gateway\" \"yarn dev:user\" \"yarn dev:course\" \"yarn dev:tag\"",
+    "dev:lesson": "yarn workspace lesson-service run dev",
+    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:gateway\" \"yarn dev:user\" \"yarn dev:course\" \"yarn dev:tag\" \"yarn dev:lesson\"",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test"

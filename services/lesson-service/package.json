@@ -1,0 +1,20 @@
+{
+  "name": "lesson-service",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc -b",
+    "lint": "eslint \"src/**/*.ts\"",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "mongoose": "^8.9.6",
+    "axios": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3"
+  },
+  "license": "MIT"
+}
