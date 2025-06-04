@@ -56,6 +56,16 @@ app.use(
   })
 );
 
+app.use(
+  "/api/comment",
+  authenticateJWT,
+  createProxyMiddleware({
+    target: `http://localhost:3006`,
+    changeOrigin: true,
+    logger: console,
+  })
+);
+
 app.use(express.json());
 
 const PORT = process.env.PORT;

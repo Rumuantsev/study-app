@@ -12,7 +12,8 @@
     "dev:course": "yarn workspace course-service run dev",
     "dev:tag": "yarn workspace tag-service run dev",
     "dev:lesson": "yarn workspace lesson-service run dev",
-    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:gateway\" \"yarn dev:user\" \"yarn dev:course\" \"yarn dev:tag\" \"yarn dev:lesson\"",
+    "dev:comment": "yarn workspace comment-service run dev",
+    "dev": "concurrently \"yarn dev:auth\" \"yarn dev:gateway\" \"yarn dev:user\" \"yarn dev:course\" \"yarn dev:tag\" \"yarn dev:lesson\" \"yarn dev:comment\"",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test"
