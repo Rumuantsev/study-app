@@ -6,6 +6,7 @@ const router = Router();
 router.post("/", lessonController.createLesson);
 router.get("/", lessonController.getAllLessons);
 router.get("/:id", lessonController.getLessonById);
+router.get("/course/:id", lessonController.getLessonsByCourseId);
 router.put("/:id", lessonController.updateLesson);
 router.delete("/:id", lessonController.deleteLesson);
 

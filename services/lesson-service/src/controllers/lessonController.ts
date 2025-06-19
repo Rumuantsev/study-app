@@ -44,6 +44,18 @@ const getLessonById = async (req: Request, res: Response) => {
   }
 };
 
+const getLessonsByCourseId = async (req: Request, res: Response) => {
+  try {
+    const courseId = req.params.id;
+
+    const lessons = await Lesson.find({ courseId: courseId });
+
+    res.status(200).json(lessons);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const updateLesson = async (req: Request, res: Response) => {
   try {
     const lesson = await Lesson.findByIdAndUpdate(req.params.id, req.body, {
@@ -77,6 +89,7 @@ export const lessonController = {
   createLesson,
   getAllLessons,
   getLessonById,
+  getLessonsByCourseId,
   updateLesson,
   deleteLesson,
 };

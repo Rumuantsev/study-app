@@ -21,6 +21,5 @@ export const processImage = async (filePath: string) => {
     .composite([{ input: watermarkBuffer, gravity: "southeast" }])
     .toFile(processedPath);
 
-  fs.unlinkSync(filePath);
   return processedPath;
 };

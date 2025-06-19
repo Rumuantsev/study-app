@@ -7,7 +7,6 @@ const createCourse = async (req: Request, res: Response) => {
     const { title, description, price, category, level, published, author } =
       req.body;
 
-    console.log(req.body);
     if (!req.file) {
       res.status(400).json({ message: "Image file is required." });
       return;
