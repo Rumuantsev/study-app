@@ -2,36 +2,23 @@ import { Request, Response } from "express";
 import { Enrollment } from "../models/enrollmentModel";
 import axios from "axios";
 
-export const enrollToCourse = async (req: Request, res: Response) => {
+export const enrollToCourse = async (userId: string, courseId: string) => {
   try {
-    const { courseId, userId } = req.body;
-
-    if (!userId || !courseId) {
-      res.status(400).json({ message: "Missing userId or courseId" });
-      return;
-    }
+    if (!userId || !courseId) throw new Error("Missing userId or courseId");
 
     const isEnrolled = await Enrollment.findOne({ userId, courseId });
-    if (isEnrolled) {
-      res.status(400).json({ message: "Already enrolled" });
-      return;
-    }
+    if (isEnrolled) throw new Error("Already enrolled");
 
     const thisCourse = await axios.get(
       `${process.env.COURSE_SERVICE_URL}/${courseId}`
     );
-    if (!thisCourse.data) {
-      res.status(404).json({ message: "Course not found" });
-      return;
-    }
+    if (!thisCourse.data) throw new Error("Course not found");
 
     const thisUser = await axios.get(
       `${process.env.USER_SERVICE_URL}/${userId}`
     );
-    if (!thisUser.data) {
-      res.status(404).json({ message: "User not found" });
-      return;
-    }
+
+    if (!thisUser.data) throw new Error("User not found");
 
     const enrollment = new Enrollment({
       userId,
@@ -40,9 +27,8 @@ export const enrollToCourse = async (req: Request, res: Response) => {
     });
 
     await enrollment.save();
-    res.status(201).json({ message: "Enrolled successfully", enrollment });
   } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    throw new Error(error.message);
   }
 };
 

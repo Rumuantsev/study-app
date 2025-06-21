@@ -1,11 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
-//import { authProxy } from "./proxies/authProxy";
 import { authenticateJWT } from "./middlewares/authMiddleware";
 import { createProxyMiddleware } from "http-proxy-middleware";
+import { enrollmentRoutes } from "./routes/enrollmentRoutes";
+import { connectRabbitMQ } from "./utils/rabbitmq";
 
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT;
+app.use(express.json());
 
 app.use(
   "/api/auth",
@@ -66,7 +69,8 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use("/api/enrollment", enrollmentRoutes);
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`API Gateway running on port ${PORT}`));
+connectRabbitMQ().then(() => {
+  app.listen(PORT, () => console.log(`API Gateway running on port ${PORT}`));
+});
