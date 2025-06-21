@@ -5,7 +5,7 @@
 ### Для запуска проекта вам потребуется: 
 #### -Node.js версии от 20.13.1
 #### -Yarn версии от 1.22.22 
-#### -MongoDB 
+
 #### Yarn можно установить через
     npm install -g yarn
   ## Установка и запуск
@@ -18,13 +18,11 @@
   ### 3. Установите зависимости:
     yarn install
   
-  ### 4. Запустите MongoDB
+  ### 4. Запустите контейнер MongoDB
+    docker run -d -p 27018:27017 --name mongo mongo:latest
   
-  ### 5. Отредактируйте переменные окружения, укажите корректную ссылку для подключения MongoDB, нужный номер хоста
-  ### Пример:
-    PORT=3000
-    MONGO_URI=mongodb://localhost:27017/mydb
-    JWT_SECRET=rtyx
+  ### 5. Запустите контейнер RabbitMQ
+    docker run -d --hostname my-rabbit --name some-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 
   ### 6. Запустите проект: 
     yarn run dev
